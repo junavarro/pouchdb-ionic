@@ -6,7 +6,7 @@ import { Platform } from '@ionic/angular';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page  implements OnInit {
+export class Tab1Page implements OnInit {
   db: any;
 
   constructor(private platform: Platform) { }
@@ -21,8 +21,21 @@ export class Tab1Page  implements OnInit {
           iosDatabaseLocation: 'Library',
           androidDatabaseImplementation: 2
         });
-        //PouchDB.plugin(require('cryptp-pouch'));
-        this.db.post({ '_id': '124', 'data': 2345 }).then((result) => {
+        PouchDB.plugin(require('transform-pouch'));
+
+        this.db.transform({
+          incoming: (doc) => {
+            // do something to the document before storage
+            console.log('before storage');
+            return doc;
+          },
+          outgoing: (doc) => {
+            // do something to the document after retrieval
+            console.log('after retrieval');
+            return doc;
+          }
+        });
+        this.db.post({ '_id': Date.now() + '124', 'data': 2345 }).then((result) => {
           console.log(result);
         });
 
