@@ -1,5 +1,7 @@
 {
   "name": "POUCH_DB_V2",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
