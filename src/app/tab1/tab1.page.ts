@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import PouchDB from 'pouchdb';
 import { Platform } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 //import * as transform from 'transform-pouch'
 @Component({
   selector: 'app-tab1',
@@ -11,7 +12,7 @@ export class Tab1Page implements OnInit {
   db: any;
   result: any;
 
-  constructor(private platform: Platform) { }
+  constructor(private platform: Platform, public toastController: ToastController) { }
 
   ngOnInit() {
     // console.log(crypto);
@@ -25,7 +26,7 @@ export class Tab1Page implements OnInit {
         });
         PouchDB.plugin(require('transform-pouch'));
         PouchDB.plugin(require('crypto-pouch'));
-      
+
 
         this.db.transform({
           incoming: (doc) => {
@@ -53,19 +54,22 @@ export class Tab1Page implements OnInit {
   }
 
   addPost() {
+    const data = {
+      '_id': Math.floor(Date.now() * Math.random()).toString(), 'data': 2345,
+      'bank': 'juan esteban navarro',
+      'secure': { 'username': 'John Doe', 'pass': '265782jcefb4vr378490' }
+    };
     this.db.post(
-      {
-        '_id': Date.now() + '124', 'data': 2345,
-        'bank': 'juan esteban navarro',
-        'secure': { 'username': 'Q2#JUANESTEBAN', 'pass': 'jnavcamach' }
-      }
+      data
     ).then((result) => {
       console.log(result);
+      this.presentToast(`Se agregó un documento ${data._id}`, 'success');
+      this.readAll();
     });
 
   }
 
-  readAll(){
+  readAll() {
     this.db.allDocs({ include_docs: true }).then(
       (result) => {
         this.result = result;
@@ -79,8 +83,19 @@ export class Tab1Page implements OnInit {
     console.log('remove', data);
   }
 
-  addCrypto(){
+  addCrypto() {
     this.db.crypto("1223455");
   }
+
+  async presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      color
+    });
+    toast.present();
+  }
+
+
 
 }

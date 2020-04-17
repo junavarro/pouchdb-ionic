@@ -6,16 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-card class="ion-padding">
-    {{result | json}}
-  </ion-card>
+<ion-content>
   <ion-button (click)="addPost()">
     add
   </ion-button>
@@ -28,4 +19,20 @@
   <ion-button (click)="readAll()">
     read values
   </ion-button>
+
+  
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Información almacenada en bases de datos</ion-card-subtitle>
+      <ion-card-title>Pouch DB</ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content >
+      <ngx-json-viewer [json]="result"></ngx-json-viewer>
+    </ion-card-content>
+  </ion-card>
+
+
+
+  
 </ion-content>
