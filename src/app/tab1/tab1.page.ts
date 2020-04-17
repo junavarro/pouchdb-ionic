@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import PouchDB from 'pouchdb';
 import { Platform } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { geoData } from '../../assets/data/sample';
 //import * as transform from 'transform-pouch'
 @Component({
   selector: 'app-tab1',
@@ -69,6 +70,21 @@ export class Tab1Page implements OnInit {
 
   }
 
+
+  addBigGeoJSON() {
+    this.db.post(
+      { "data": JSON.parse(JSON.stringify(geoData)) }
+    ).then((result) => {
+      console.log(result);
+      this.presentToast(`Se agregó un documento geosjon`, 'primary');
+    }, (error) => {
+      this.presentToast(`Error en documento geosjon ${error}`, 'danger');
+    });
+
+    console.log(JSON.stringify(geoData[0]));
+
+  }
+
   readAll() {
     this.db.allDocs({ include_docs: true }).then(
       (result) => {
@@ -95,6 +111,9 @@ export class Tab1Page implements OnInit {
     });
     toast.present();
   }
+
+
+
 
 
 

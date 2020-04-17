@@ -19,18 +19,21 @@
   <ion-button (click)="readAll()">
     read values
   </ion-button>
+  <ion-button (click)="addBigGeoJSON()">
+    add geojson
+  </ion-button>
 
   
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Información almacenada en bases de datos</ion-card-subtitle>
-      <ion-card-title>Pouch DB</ion-card-title>
-    </ion-card-header>
+ 
+    <div>
+      <ion-text>Información almacenada en bases de datos</ion-text>
+      <ion-title>Pouch DB</ion-title>
+    </div>
     
-    <ion-card-content >
+    <div class="json ion-margin ion-padding" >
       <ngx-json-viewer [json]="result"></ngx-json-viewer>
-    </ion-card-content>
-  </ion-card>
+    </div>
+ 
 
 
 
