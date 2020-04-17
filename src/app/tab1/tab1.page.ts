@@ -3,7 +3,7 @@ import PouchDB from 'pouchdb';
 import { Platform } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { geoData } from '../../assets/data/sample';
-//import * as transform from 'transform-pouch'
+// import * as transform from 'transform-pouch'
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -56,9 +56,9 @@ export class Tab1Page implements OnInit {
 
   addPost() {
     const data = {
-      '_id': Math.floor(Date.now() * Math.random()).toString(), 'data': 2345,
-      'bank': 'juan esteban navarro',
-      'secure': { 'username': 'John Doe', 'pass': '265782jcefb4vr378490' }
+      _id: Math.floor(Date.now() * Math.random()).toString(), data: 2345,
+      bank: 'juan esteban navarro',
+      secure: { username: 'John Doe', pass: '265782jcefb4vr378490' }
     };
     this.db.post(
       data
@@ -73,7 +73,7 @@ export class Tab1Page implements OnInit {
 
   addBigGeoJSON() {
     this.db.post(
-      { "data": JSON.parse(JSON.stringify(geoData)) }
+      { data: JSON.parse(JSON.stringify(geoData)) }
     ).then((result) => {
       console.log(result);
       this.presentToast(`Se agregó un documento geosjon`, 'primary');
@@ -95,12 +95,12 @@ export class Tab1Page implements OnInit {
   }
 
   removeCrypto() {
-    let data = this.db.removeCrypto();
+    const data = this.db.removeCrypto();
     console.log('remove', data);
   }
 
   addCrypto() {
-    this.db.crypto("1223455");
+    this.db.crypto('1223455');
   }
 
   async presentToast(message: string, color: string) {
