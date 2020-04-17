@@ -67,4 +67,9 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 (window as any).global = window;
 global.Buffer = global.Buffer || require('buffer').Buffer;
 (window as any).process = {};
+(window as any).global = window;
+(window as any).process = window;
+(window as any).process.browser = true;
+(window as any).process.version = '';
+(window as any).process.versions = { node: false };
 (window as any).process.nextTick = setTimeout;

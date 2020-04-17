@@ -38,7 +38,13 @@ export class Tab1Page implements OnInit {
             return doc;
           }
         });
-        this.db.post({ '_id': Date.now() + '124', 'data': 2345 }).then((result) => {
+        this.db.post(
+          {
+            '_id': Date.now() + '124', 'data': 2345,
+            'bank': 'juan esteban navarro',
+             'secure': { 'username': 'Q2#JUANESTEBAN', 'pass': 'jnavcamach' }
+          }
+        ).then((result) => {
           console.log(result);
         });
 
