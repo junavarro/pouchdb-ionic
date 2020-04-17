@@ -13,5 +13,19 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-card class="ion-padding">
+    {{result | json}}
+  </ion-card>
+  <ion-button (click)="addPost()">
+    add
+  </ion-button>
+  <ion-button (click)="removeCrypto()">
+    remove crypto
+  </ion-button>
+  <ion-button (click)="addCrypto()">
+    add crypto
+  </ion-button>
+  <ion-button (click)="readAll()">
+    read values
+  </ion-button>
 </ion-content>

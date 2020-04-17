@@ -9,6 +9,7 @@ import { Platform } from '@ionic/angular';
 })
 export class Tab1Page implements OnInit {
   db: any;
+  result: any;
 
   constructor(private platform: Platform) { }
 
@@ -24,7 +25,7 @@ export class Tab1Page implements OnInit {
         });
         PouchDB.plugin(require('transform-pouch'));
         PouchDB.plugin(require('crypto-pouch'));
-        this.db.crypto("1223455");
+      
 
         this.db.transform({
           incoming: (doc) => {
@@ -38,23 +39,48 @@ export class Tab1Page implements OnInit {
             return doc;
           }
         });
-        this.db.post(
-          {
-            '_id': Date.now() + '124', 'data': 2345,
-            'bank': 'juan esteban navarro',
-             'secure': { 'username': 'Q2#JUANESTEBAN', 'pass': 'jnavcamach' }
-          }
-        ).then((result) => {
-          console.log(result);
-        });
 
         this.db.allDocs({ include_docs: true }).then(
           (result) => {
+            this.result = result;
             console.log(result);
           }
         );
+
+
       }
     );
+  }
+
+  addPost() {
+    this.db.post(
+      {
+        '_id': Date.now() + '124', 'data': 2345,
+        'bank': 'juan esteban navarro',
+        'secure': { 'username': 'Q2#JUANESTEBAN', 'pass': 'jnavcamach' }
+      }
+    ).then((result) => {
+      console.log(result);
+    });
+
+  }
+
+  readAll(){
+    this.db.allDocs({ include_docs: true }).then(
+      (result) => {
+        this.result = result;
+        console.log(result);
+      }
+    );
+  }
+
+  removeCrypto() {
+    let data = this.db.removeCrypto();
+    console.log('remove', data);
+  }
+
+  addCrypto(){
+    this.db.crypto("1223455");
   }
 
 }
